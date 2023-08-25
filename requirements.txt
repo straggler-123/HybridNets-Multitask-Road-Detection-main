@@ -1,0 +1,6 @@
+opencv-python
+onnx
+onnxruntime
+onnxoptimizer
+onnxruntime-cpu
+acl
