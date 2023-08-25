@@ -22,3 +22,8 @@ python om_video.py
 ```
 python om_camera.py
 ```
+#检测效果
+![demo_test](https://github.com/straggler-123/HybridNets-Multitask-Road-Detection-main/assets/93413016/f0c431bc-713f-4871-b1c0-93049146b118)
+
+https://github.com/straggler-123/HybridNets-Multitask-Road-Detection-main/assets/93413016/e5a72af3-cec3-4e8a-b35e-a786ef7ecfe5
+
