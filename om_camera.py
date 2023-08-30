@@ -5,7 +5,7 @@ sys.path.append("./common/acllite")
 from acllite_model import AclLiteModel
 from acllite_resource import AclLiteResource
 from utils import *
-
+import os
 import matplotlib.pyplot as plt
 MODEL_WIDTH = 384
 MODEL_HEIGHT = 512
@@ -153,11 +153,19 @@ if __name__ == '__main__':
     model_path = 'models/om_hybird_384_512.om'
     anchor_path = "models/hybridnets_384x512/anchors_384x512.npy"
     roadEstimator = HybridNets(model_path, anchor_path, conf_thres=0.5, iou_thres=0.5)
+    output_path = "./out"
+    output_Video = "om_camera.mp4"
+    output_Video = os.path.join(output_path, output_Video)
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # DIVX, XVID, MJPG, X264, WMV1, WMV2
     # pic_processed
     # 捕获序号为0的摄像头
     cameroCapture = cv2.VideoCapture(0)
     # 读取帧
     success, frame = cameroCapture.read()
+    fps = 5
+    Width = 1920
+    Height = 1080
+    outVideo = cv2.VideoWriter(output_Video, fourcc, fps, (Width, Height))
     plt.ion()
     fig1 = plt.figure('combined_img')
     while success and cv2.waitKey(1) == -1:
@@ -168,6 +176,7 @@ if __name__ == '__main__':
         ax1 = fig1.add_subplot(1, 1, 1)
         ax1.axis('off')  # 关掉坐标轴
         ax1.imshow(combined_img, cmap='gray')
+        outVideo.write(combined_img)
         # 停顿时间
         plt.pause(0.05)
         # 清除当前画布
@@ -175,9 +184,9 @@ if __name__ == '__main__':
         success, frame = cameroCapture.read()
 
     cameroCapture.release()
+    outVideo.release()
     plt.ioff()
     print("Execute end")
-
 
 
 
